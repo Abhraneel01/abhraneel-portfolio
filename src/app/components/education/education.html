@@ -1,0 +1,35 @@
+<section id="education" class="section">
+  <div class="container">
+    <h2 class="section-title" data-index="06.">Education &amp; Certifications</h2>
+    <p class="section-sub">Foundations and continuous learning.</p>
+
+    <div class="grid">
+      <div class="col">
+        @for (e of education; track e.degree; let i = $index) {
+          <div class="card edu" appReveal [revealDelay]="i * 90">
+            <span class="icon">🎓</span>
+            <div>
+              <h4>{{ e.degree }}</h4>
+              <p class="inst">{{ e.institute }}</p>
+              <div class="meta">
+                <span class="chip">{{ e.period }}</span>
+                @if (e.detail) {
+                  <span class="chip accent">{{ e.detail }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="card certs" appReveal [revealDelay]="120">
+        <h4>🏅 Certifications &amp; Publications</h4>
+        <ul>
+          @for (c of certifications; track c) {
+            <li>{{ c }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

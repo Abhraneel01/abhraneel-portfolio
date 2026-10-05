@@ -1,0 +1,32 @@
+<section id="about" class="section alt">
+  <div class="container">
+    <h2 class="section-title" data-index="01.">About me</h2>
+    <p class="section-sub">A quick look at who I am and what I do.</p>
+
+    <div class="grid">
+      <div appReveal>
+        <p class="summary">{{ profile.summary }}</p>
+        <div class="stats">
+          @for (stat of profile.stats; track stat.label) {
+            <div class="stat card">
+              <strong class="gradient-text">{{ stat.value }}</strong>
+              <span>{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="highlights">
+        @for (h of highlights; track h.title; let i = $index) {
+          <div class="card highlight" appReveal [revealDelay]="i * 90">
+            <span class="icon">{{ h.icon }}</span>
+            <div>
+              <h4>{{ h.title }}</h4>
+              <p>{{ h.text }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

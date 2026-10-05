@@ -1,0 +1,67 @@
+<section id="contact" class="section alt">
+  <div class="container">
+    <h2 class="section-title" data-index="07.">Get in touch</h2>
+    <p class="section-sub">I'm open to Angular / frontend roles and collaborations. My inbox is always open.</p>
+
+    <div class="grid">
+      <div class="info" appReveal>
+        <a class="card item" [href]="'mailto:' + profile.email">
+          <span class="icon">✉️</span>
+          <div><small>Email</small><strong>{{ profile.email }}</strong></div>
+        </a>
+        <button type="button" class="btn btn-ghost btn-sm copy" (click)="copyEmail()">
+          {{ copied() ? '✓ Copied!' : 'Copy email' }}
+        </button>
+        <a class="card item" [href]="'tel:' + profile.phone.replace(' ', '')">
+          <span class="icon">📞</span>
+          <div><small>Phone</small><strong>{{ profile.phone }}</strong></div>
+        </a>
+        <a class="card item" [href]="profile.linkedin" target="_blank" rel="noopener">
+          <span class="icon">💼</span>
+          <div><small>LinkedIn</small><strong>abhraneel-khan</strong></div>
+        </a>
+        <div class="card item">
+          <span class="icon">📍</span>
+          <div><small>Location</small><strong>{{ profile.location }}</strong></div>
+        </div>
+      </div>
+
+      <form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate appReveal [revealDelay]="120">
+        <div class="row">
+          <label>
+            Name
+            <input formControlName="name" type="text" placeholder="Your name" [class.err]="invalid('name')" />
+            @if (invalid('name')) {
+              <small class="error">Please enter your name (min 2 characters).</small>
+            }
+          </label>
+          <label>
+            Email
+            <input formControlName="email" type="email" placeholder="you@company.com" [class.err]="invalid('email')" />
+            @if (invalid('email')) {
+              <small class="error">Please enter a valid email.</small>
+            }
+          </label>
+        </div>
+        <label>
+          Subject
+          <input formControlName="subject" type="text" placeholder="Job opportunity, project…" [class.err]="invalid('subject')" />
+          @if (invalid('subject')) {
+            <small class="error">Subject is required.</small>
+          }
+        </label>
+        <label>
+          Message
+          <textarea formControlName="message" rows="5" placeholder="Say hello…" [class.err]="invalid('message')"></textarea>
+          @if (invalid('message')) {
+            <small class="error">Message should be at least 10 characters.</small>
+          }
+        </label>
+        <button type="submit" class="btn btn-primary">Send message ✈️</button>
+        @if (sent()) {
+          <p class="ok">Your email app should have opened with the message ready to send. Thanks for reaching out!</p>
+        }
+      </form>
+    </div>
+  </div>
+</section>

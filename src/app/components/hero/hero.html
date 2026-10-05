@@ -1,0 +1,50 @@
+<section id="home" class="hero">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+  <div class="container hero-grid">
+    <div class="intro">
+      <span class="badge"><span class="dot"></span> Open to new opportunities</span>
+      <p class="hello mono">Hi, my name is</p>
+      <h1 class="name">{{ profile.name }}</h1>
+      <h2 class="role">
+        I'm an <span class="gradient-text">{{ typed() }}</span><span class="caret">|</span>
+      </h2>
+      <p class="lead">
+        I build fast, maintainable enterprise web apps with <strong>Angular</strong>, <strong>TypeScript</strong> and
+        <strong>RxJS</strong> — from reusable components and reactive forms to configurable data tables.
+      </p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-primary">View my work →</a>
+        <a [href]="profile.resumeUrl" class="btn btn-ghost" download>Download CV</a>
+      </div>
+      <div class="socials">
+        <a [href]="profile.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+        <span>•</span>
+        <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+        <span>•</span>
+        <span class="muted">📍 {{ profile.location }}</span>
+      </div>
+    </div>
+
+    <div class="code-card mono" aria-hidden="true">
+      <div class="dots"><i></i><i></i><i></i><span>developer.ts</span></div>
+<pre><span class="k">&#64;Component</span>(&#123;
+  selector: <span class="s">'app-developer'</span>,
+&#125;)
+<span class="k">export class</span> <span class="c">Developer</span> &#123;
+  name = <span class="s">'{{ profile.firstName }}'</span>;
+  stack = [<span class="s">'Angular'</span>, <span class="s">'TypeScript'</span>,
+           <span class="s">'RxJS'</span>, <span class="s">'SCSS'</span>];
+  coffee = signal(<span class="n">∞</span>);
+
+  <span class="f">solve</span>(bug: <span class="c">Bug</span>) &#123;
+    <span class="k">return</span> <span class="k">this</span>.debug(bug)
+      .pipe(<span class="f">fixIt</span>());
+  &#125;
+&#125;</pre>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-hint" aria-label="Scroll to about">↓</a>
+</section>

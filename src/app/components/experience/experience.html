@@ -1,0 +1,31 @@
+<section id="experience" class="section alt">
+  <div class="container">
+    <h2 class="section-title" data-index="03.">Experience</h2>
+    <p class="section-sub">Where I've been building things.</p>
+
+    <ol class="timeline">
+      @for (job of jobs; track job.company + job.start) {
+        <li appReveal>
+          <span class="node"></span>
+          <div class="card">
+            <div class="head">
+              <div>
+                <h3>{{ job.role }}</h3>
+                <p class="company">{{ job.company }} · {{ job.location }}</p>
+              </div>
+              <div class="when">
+                <span class="chip accent">{{ job.start | monthYear }} – {{ job.end | monthYear }}</span>
+                <small class="mono">{{ job.start | duration: job.end }}</small>
+              </div>
+            </div>
+            <ul>
+              @for (point of job.points; track $index) {
+                <li>{{ point }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

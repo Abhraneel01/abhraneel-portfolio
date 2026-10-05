@@ -1,0 +1,78 @@
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 28px;
+  border-left: 2px solid var(--border);
+
+  > li {
+    position: relative;
+    margin-bottom: 28px;
+  }
+}
+
+.node {
+  position: absolute;
+  left: -38px;
+  top: 28px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 3px solid var(--accent);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+}
+
+.company {
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+.when {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+
+  small {
+    color: var(--muted);
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 10px;
+    color: var(--muted);
+
+    &::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .when {
+    align-items: flex-start;
+  }
+}

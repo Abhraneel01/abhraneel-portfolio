@@ -1,0 +1,84 @@
+<section id="projects" class="section">
+  <div class="container">
+    <h2 class="section-title" data-index="04.">Projects</h2>
+    <p class="section-sub">Production work and personal builds.</p>
+
+    <!-- Featured project -->
+    <article class="card featured" appReveal>
+      <div class="f-head">
+        <div>
+          <span class="chip accent">★ Featured · Enterprise</span>
+          <h3>{{ featured.name }}</h3>
+          <p class="tagline">{{ featured.tagline }}</p>
+        </div>
+        <a href="#demo" class="btn btn-ghost btn-sm">Try a mini demo ↓</a>
+      </div>
+
+      <p class="overview">{{ featured.overview }}</p>
+
+      <div class="chips stack">
+        @for (t of featured.stack; track t) {
+          <span class="chip mono">{{ t }}</span>
+        }
+      </div>
+
+      <div class="tabs" role="tablist">
+        @for (t of tabs; track t.id) {
+          <button type="button" role="tab" [class.active]="tab() === t.id" [attr.aria-selected]="tab() === t.id" (click)="tab.set(t.id)">
+            {{ t.label }}
+          </button>
+        }
+      </div>
+
+      <div class="tab-body">
+        @switch (tab()) {
+          @case ('features') {
+            <ul class="ticks">
+              @for (f of featured.features; track $index) {
+                <li>{{ f }}</li>
+              }
+            </ul>
+          }
+          @case ('integrations') {
+            <div class="integrations">
+              @for (api of featured.integrations; track api) {
+                <div class="api"><span class="mono method">API</span> {{ api }}</div>
+              }
+            </div>
+          }
+          @case ('challenges') {
+            <div class="challenges">
+              @for (c of featured.challenges; track c.title) {
+                <div class="challenge">
+                  <h4>🐛 {{ c.title }}</h4>
+                  <p>{{ c.detail }}</p>
+                </div>
+              }
+            </div>
+          }
+        }
+      </div>
+    </article>
+
+    <!-- Other projects -->
+    <div class="others">
+      @for (p of others; track p.name; let i = $index) {
+        <article class="card project" appReveal [revealDelay]="i * 90">
+          <div class="p-top">
+            <span class="folder">📁</span>
+            @if (p.link) {
+              <a [href]="p.link" target="_blank" rel="noopener" aria-label="Open project">↗</a>
+            }
+          </div>
+          <h4>{{ p.name }}</h4>
+          <p>{{ p.description }}</p>
+          <div class="p-stack mono">
+            @for (s of p.stack; track s) {
+              <span>{{ s }}</span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

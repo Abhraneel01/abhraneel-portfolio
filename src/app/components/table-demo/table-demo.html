@@ -1,0 +1,132 @@
+<section id="demo" class="section alt">
+  <div class="container">
+    <h2 class="section-title" data-index="05.">Live demo</h2>
+    <p class="section-sub">
+      A mini version of the configurable tables I built for ShipCarte. Drag headers <span class="mono">⋮⋮</span> to reorder,
+      show/hide columns, sort, filter and scroll for more — all running in your browser with mock data.
+    </p>
+
+    <div class="card demo" appReveal>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <input class="input" type="search" placeholder="🔍 Search orders, customers, cities…" [formControl]="search" aria-label="Search orders" />
+
+        <select class="input" [value]="status()" (change)="setStatus($any($event.target).value)" aria-label="Filter by status">
+          @for (s of statuses; track s) {
+            <option [value]="s">{{ s === 'All' ? 'All statuses' : s }}</option>
+          }
+        </select>
+
+        <div class="settings-wrap">
+          <button type="button" class="btn btn-ghost btn-sm" (click)="settingsOpen.set(!settingsOpen())" [attr.aria-expanded]="settingsOpen()">
+            ⚙️ Columns ({{ visibleColumns().length }}/{{ columns().length }})
+          </button>
+
+          @if (settingsOpen()) {
+            <div class="settings card">
+              <div class="settings-head">
+                <strong>Column settings</strong>
+                <button type="button" class="link" (click)="resetColumns()">Reset</button>
+              </div>
+              <p class="hint">Drag to reorder · tick to show</p>
+              <ul cdkDropList [cdkDropListData]="columns()" (cdkDropListDropped)="dropInPanel($event)" class="col-list">
+                @for (col of columns(); track col.key) {
+                  <li cdkDrag cdkDragLockAxis="y" class="col-item">
+                    <span class="grip" cdkDragHandle>⋮⋮</span>
+                    <label>
+                      <input
+                        type="checkbox"
+                        [checked]="col.visible"
+                        [disabled]="col.visible && visibleColumns().length === 1"
+                        (change)="toggleColumn(col.key)"
+                      />
+                      {{ col.label }}
+                    </label>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Table with infinite scroll -->
+      <div class="scroller" (scroll)="onScroll($event)">
+        <table>
+          <thead>
+            <tr cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="visibleColumns()" (cdkDropListDropped)="dropHeader($event)">
+              @for (col of visibleColumns(); track col.key) {
+                <th cdkDrag cdkDragLockAxis="x" [class.sorted]="sortKey() === col.key">
+                  <span class="grip" cdkDragHandle title="Drag to reorder">⋮⋮</span>
+                  <button type="button" class="sort" (click)="sortBy(col.key)">
+                    {{ col.label }}
+                    <span class="arrow">{{ sortKey() === col.key ? (sortDir() === 'asc' ? '▲' : '▼') : '↕' }}</span>
+                  </button>
+                  <span *cdkDragPreview class="mono">{{ col.label }}</span>
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of rows(); track row.id) {
+              <tr>
+                @for (col of visibleColumns(); track col.key) {
+                  <td>
+                    @switch (col.key) {
+                      @case ('id') {
+                        <span class="mono id">{{ row.id }}</span>
+                      }
+                      @case ('status') {
+                        <span [class]="'status ' + statusClass(row.status)">{{ row.status }}</span>
+                      }
+                      @case ('date') {
+                        {{ row.date | date: 'dd MMM yyyy' }}
+                      }
+                      @case ('amount') {
+                        <span class="amount">{{ row.amount | currency: 'INR' : 'symbol' : '1.0-0' }}</span>
+                      }
+                      @default {
+                        {{ row[col.key] }}
+                      }
+                    }
+                  </td>
+                }
+              </tr>
+            }
+
+            @if (loading()) {
+              @for (s of skeletonRows; track s) {
+                <tr class="skeleton-row">
+                  @for (col of visibleColumns(); track col.key) {
+                    <td><span class="skeleton"></span></td>
+                  }
+                </tr>
+              }
+            }
+
+            @if (!loading() && rows().length === 0) {
+              <tr>
+                <td class="empty" [attr.colspan]="visibleColumns().length">No orders match your filters.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="footer mono">
+        <span>Showing {{ rows().length }} of {{ total() }} orders</span>
+        <span>{{ hasMore() ? 'Scroll for more ↓' : 'All loaded ✓' }}</span>
+      </div>
+    </div>
+
+    <div class="tech chips">
+      <span class="chip accent">Angular CDK Drag &amp; Drop</span>
+      <span class="chip accent">Signals &amp; computed()</span>
+      <span class="chip accent">RxJS debounceTime</span>
+      <span class="chip accent">Reactive Forms</span>
+      <span class="chip accent">Skeleton loaders</span>
+      <span class="chip accent">Infinite scroll</span>
+      <span class="chip accent">Persisted preferences</span>
+    </div>
+  </div>
+</section>

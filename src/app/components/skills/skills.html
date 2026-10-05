@@ -1,0 +1,27 @@
+<section id="skills" class="section">
+  <div class="container">
+    <h2 class="section-title" data-index="02.">Skills</h2>
+    <p class="section-sub">Technologies and practices I use day to day.</p>
+
+    <div class="tabs" role="tablist">
+      @for (tab of tabs; track tab) {
+        <button type="button" role="tab" [class.active]="filter() === tab" [attr.aria-selected]="filter() === tab" (click)="filter.set(tab)">
+          {{ tab }}
+        </button>
+      }
+    </div>
+
+    <div class="grid">
+      @for (group of visibleGroups(); track group.title; let i = $index) {
+        <div class="card group" appReveal [revealDelay]="i * 70">
+          <h3><span>{{ group.icon }}</span> {{ group.title }}</h3>
+          <div class="chips">
+            @for (skill of group.skills; track skill) {
+              <span class="chip">{{ skill }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
