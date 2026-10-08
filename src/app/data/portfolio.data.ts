@@ -14,7 +14,7 @@ export const PROFILE: Profile = {
   email: 'abhraneelkhan@gmail.com',
   linkedin: 'https://www.linkedin.com/in/abhraneel-khan',
   github: 'https://github.com/', // TODO: add your GitHub profile URL
-  resumeUrl: 'Abhraneel_Khan_Resume.pdf',
+  resumeUrl: 'Abhraneel_Khan_Front_End_Resume.pdf',
   summary:
     'Angular Developer building and maintaining enterprise web applications with Angular, TypeScript, RxJS and SCSS. ' +
     'I enjoy designing reusable components, Reactive Forms, routing, REST API integration, HTTP interceptors and authentication flows. ' +
