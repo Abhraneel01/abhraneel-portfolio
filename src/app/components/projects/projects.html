@@ -15,6 +15,7 @@
       </div>
 
       <p class="overview">{{ featured.overview }}</p>
+      <p class="overview"><strong>Responsibilities:</strong> {{ featured.responsibilities }}</p>
 
       <div class="chips stack">
         @for (t of featured.stack; track t) {
@@ -34,8 +35,8 @@
         @switch (tab()) {
           @case ('features') {
             <ul class="ticks">
-              @for (f of featured.features; track $index) {
-                <li>{{ f }}</li>
+              @for (f of featured.features; track f.title) {
+                <li><strong>{{ f.title }}:</strong> {{ f.detail }}</li>
               }
             </ul>
           }
