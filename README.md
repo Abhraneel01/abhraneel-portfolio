@@ -24,7 +24,7 @@ npm run build        # output: dist/abhraneel-portfolio/browser
 ## Edit content
 
 All text lives in **`src/app/data/portfolio.data.ts`**. Update it there; no component changes needed.
-Replace `public/Abhraneel_Khan_Resume.pdf` to update the downloadable CV, and set your GitHub URL in `PROFILE.github`.
+Replace `public/Abhraneel_Khan_Front_End_Resume.pdf` to update the downloadable CV, and set your GitHub URL in `PROFILE.github`.
 
 ## Deploy for free
 

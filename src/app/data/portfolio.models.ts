@@ -31,8 +31,9 @@ export interface FeaturedProject {
   name: string;
   tagline: string;
   overview: string;
+  responsibilities: string;
   stack: string[];
-  features: string[];
+  features: { title: string; detail: string }[];
   integrations: string[];
   challenges: { title: string; detail: string }[];
 }
